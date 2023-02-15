@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace Wordle_Solver
 {
@@ -16,6 +17,7 @@ namespace Wordle_Solver
 
         string[] LettersEntered = new string[5];
         string[] words;
+        Dictionary<int, String> WordEntered;
 
         public WordleSolver()
         {
@@ -26,6 +28,7 @@ namespace Wordle_Solver
         {
             string file = @"C:\Users\FIE21502302\Documents\Visual Studio 2022\Code Snippets\Visual C#\My Code Snippets\Wordle Solver\TrimedWordle.txt";
             words = File.ReadAllLines(file);
+            WordEntered = new Dictionary<int, string>();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -60,9 +63,11 @@ namespace Wordle_Solver
 
             for (int letter = 0; letter < LettersEntered.Length; letter++)
             {
+                WordEntered.Add(letter, LettersEntered[letter]);
+            }
                 foreach (string word in words)
                 {
-                    if(EnteredWord.All(Letter => word.Contains(LettersEntered[letter])) && EnteredWord.GroupBy(Letter => letter).All()) {
+                    if(word.Substring(WordEntered)) {
                         PossibleWords.Items.Add(word);
                     }
 
@@ -88,4 +93,4 @@ namespace Wordle_Solver
             }
         }
     }
-}
+//}
