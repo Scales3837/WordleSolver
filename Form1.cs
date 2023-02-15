@@ -36,42 +36,85 @@ namespace Wordle_Solver
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             LettersEntered[0] = textBox1.Text;
+            textBox2.Focus();
         }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBox1.Text))
+            {
+                textBox1.Text = "_";
+            }
+        } 
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             LettersEntered[1] = textBox2.Text;
+            textBox3.Focus();
+        }
+
+        private void textBox2_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBox2.Text))
+            {
+                textBox2.Text = "_";
+            }
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             LettersEntered[2] = textBox3.Text;
+            textBox4.Focus();
+        }
+
+        private void textBox3_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBox3.Text))
+            {
+                textBox3.Text = "_";
+            }
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
             LettersEntered[3] = textBox4.Text;
+            textBox5.Focus();
+        }
+
+        private void textBox4_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBox4.Text))
+            {
+                textBox4.Text = "_";
+            }
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
             LettersEntered[4] = textBox5.Text;
+            button1.Focus();
+        }
+
+        private void textBox5_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBox5.Text))
+            {
+                textBox5.Text = "_";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string EnteredWord = "";
+
             foreach (string ValidWord in words)
             {
                 Words.Add(ValidWord);
             }
             WordEntered.Clear();
             PossibleWords.Items.Clear();
-            string EnteredWord = textBox1.Text + textBox2.Text + textBox3.Text + textBox4.Text + textBox5.Text;
-            /*bool char1;
-            bool char2;
-            bool char3;
-            bool char4;
-            bool char5;*/
+
+            EnteredWord = textBox1.Text + textBox2.Text + textBox3.Text + textBox4.Text + textBox5.Text;
 
             for (int i =0;i <=4; i++)
             {
@@ -80,8 +123,9 @@ namespace Wordle_Solver
                 
                     foreach (KeyValuePair<int, string> word in WordEntered)
                     {
-                        foreach (string Word in words)
-                        {
+                Application.DoEvents();
+                foreach (string Word in words)
+                {
                             if (Word.Substring(word.Key,1) == word.Value)
                             {
                                 //PossibleWords.Items.Add(Word);
@@ -90,10 +134,10 @@ namespace Wordle_Solver
                             {
                                 Words.Remove(Word);
                             }
-                        if(Words.Count == 1)
-                        {
-                            PossibleWords.Items.Add(Word);
-                        }
+                            if (Words.Count == 1)
+                            {
+                                PossibleWords.Items.Add(Words[0]);
+                            }
                         }
 
                         /*if (LettersEntered[letter] == null)
