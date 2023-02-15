@@ -130,6 +130,7 @@ namespace Wordle_Solver
                             {
                                 //PossibleWords.Items.Add(Word);
                             }
+                            else if(word.Value == "_") { }
                             else
                             {
                                 Words.Remove(Word);
@@ -139,25 +140,6 @@ namespace Wordle_Solver
                                 PossibleWords.Items.Add(Words[0]);
                             }
                         }
-
-                        /*if (LettersEntered[letter] == null)
-                        {
-                            continue;
-                        }
-                        if (word.IndexOf(LettersEntered[letter]) == -1)
-                        {
-                            break;
-                        }
-                        if (word.IndexOf(LettersEntered[letter]) == EnteredWord[letter])
-                        {
-                            PossibleWords.Items.Add(word);
-                            break;
-                        }
-                        else
-                        {
-                            PossibleWords.Items.Clear();
-                            break;
-                        }*/
                 }
             }
         }
