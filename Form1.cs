@@ -28,7 +28,7 @@ namespace Wordle_Solver
 
         private void WordleSolver_Load(object sender, EventArgs e)
         {
-            string file = @"C:\Users\FIE21502302\Documents\Visual Studio 2022\Code Snippets\Visual C#\My Code Snippets\Wordle Solver\TrimedWordle.txt";
+            string file = @"C:\Users\FIE21502302\Documents\Visual Studio 2022\Code Snippets\Visual C#\My Code Snippets\Wordle Solver\valid-wordle-words.txt";
             words = File.ReadAllLines(file);
             WordEntered = new Dictionary<int, string>();
         }
@@ -138,6 +138,7 @@ namespace Wordle_Solver
                             if (Words.Count == 1)
                             {
                                 PossibleWords.Items.Add(Words[0]);
+                                break;
                             }
                         }
                 }
