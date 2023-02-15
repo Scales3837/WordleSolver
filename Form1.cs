@@ -60,37 +60,46 @@ namespace Wordle_Solver
         {
             PossibleWords.Items.Clear();
             string EnteredWord = textBox1.Text + textBox2.Text + textBox3.Text + textBox4.Text + textBox5.Text;
+            bool char1;
+            bool char2;
+            bool char3;
+            bool char4;
+            bool char5;
 
-            for (int letter = 0; letter < LettersEntered.Length; letter++)
+            for (int i =0;i <=4; i++)
             {
-                WordEntered.Add(letter, LettersEntered[letter]);
+                WordEntered.Add(i, EnteredWord.Substring(i, 1));
             }
-                foreach (string word in words)
-                {
-                    if(word.Substring(WordEntered)) {
-                        PossibleWords.Items.Add(word);
-                    }
+                
+                    foreach (KeyValuePair<int, string> word in WordEntered)
+                    {
+                        foreach (string Word in words)
+                        {
+                            if (Word.Substring(word.Key,1) == word.Value)
+                            {
+                                PossibleWords.Items.Add(word);
+                            }
+                        }
 
-                    /*if (LettersEntered[letter] == null)
-                    {
-                        continue;
-                    }
-                    if (word.IndexOf(LettersEntered[letter]) == -1)
-                    {
-                        break;
-                    }
-                    if (word.IndexOf(LettersEntered[letter]) == EnteredWord[letter])
-                    {
-                        PossibleWords.Items.Add(word);
-                        break;
-                    }
-                    else
-                    {
-                        PossibleWords.Items.Clear();
-                        break;
-                    }*/
+                        /*if (LettersEntered[letter] == null)
+                        {
+                            continue;
+                        }
+                        if (word.IndexOf(LettersEntered[letter]) == -1)
+                        {
+                            break;
+                        }
+                        if (word.IndexOf(LettersEntered[letter]) == EnteredWord[letter])
+                        {
+                            PossibleWords.Items.Add(word);
+                            break;
+                        }
+                        else
+                        {
+                            PossibleWords.Items.Clear();
+                            break;
+                        }*/
                 }
             }
         }
     }
-//}
