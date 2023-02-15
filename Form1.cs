@@ -19,6 +19,8 @@ namespace Wordle_Solver
         string[] words;
         Dictionary<int, String> WordEntered;
 
+        List<string> Words = new List<string>();
+
         public WordleSolver()
         {
             InitializeComponent();
@@ -58,13 +60,18 @@ namespace Wordle_Solver
 
         private void button1_Click(object sender, EventArgs e)
         {
+            foreach (string ValidWord in words)
+            {
+                Words.Add(ValidWord);
+            }
+            WordEntered.Clear();
             PossibleWords.Items.Clear();
             string EnteredWord = textBox1.Text + textBox2.Text + textBox3.Text + textBox4.Text + textBox5.Text;
-            bool char1;
+            /*bool char1;
             bool char2;
             bool char3;
             bool char4;
-            bool char5;
+            bool char5;*/
 
             for (int i =0;i <=4; i++)
             {
@@ -77,8 +84,16 @@ namespace Wordle_Solver
                         {
                             if (Word.Substring(word.Key,1) == word.Value)
                             {
-                                PossibleWords.Items.Add(word);
+                                //PossibleWords.Items.Add(Word);
                             }
+                            else
+                            {
+                                Words.Remove(Word);
+                            }
+                        if(Words.Count == 1)
+                        {
+                            PossibleWords.Items.Add(Word);
+                        }
                         }
 
                         /*if (LettersEntered[letter] == null)
