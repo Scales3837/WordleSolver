@@ -15,7 +15,7 @@ namespace Wordle_Solver
     internal class Test
     {
         public bool OriginalWordTested = false;
-        public List<string> CorrectWords = new List<string>();
+        public List<string> IncorrectLetters = new List<string>();
 
         bool LetterOneCorrect;
         bool LetterOneWrongPlace;
@@ -62,21 +62,64 @@ namespace Wordle_Solver
             }
         }
 
-        public void TestWords(string feedback1, string feedback2, string feedback3, string feedback4, string feedback5, TextBox letter1, TextBox letter2, TextBox letter3, TextBox letter4, TextBox letter5, string[] words)
+
+
+        public string GenerateRandom(string[] WordList, string feedback1)
         {
             string[] Letters = new string[5];
             Random random = new Random();
-            int randomValue = random.Next(words.Count() - 1);
-            string ChosenWord = words[randomValue];
-            if(feedback1 == "Incorrect letter")
-            {
-                MessageBox.Show(ChosenWord);
-            }
+            int randomValue = random.Next(WordList.Count() - 1);
+            string ChosenWord = WordList[randomValue];
             Letters[0] = ChosenWord[0].ToString();
             Letters[1] = ChosenWord[1].ToString();
             Letters[2] = ChosenWord[2].ToString();
             Letters[3] = ChosenWord[3].ToString();
             Letters[4] = ChosenWord[4].ToString();
+
+            bool correct = IsGeneratedWordCorrect(ChosenWord, WordList, feedback1);
+
+            if (OriginalWordTested == false)
+            {
+                OriginalWordTested = true;
+            }
+            if (correct)
+            {
+                MessageBox.Show(ChosenWord);
+            }
+            else
+            {
+                GenerateRandom(WordList, feedback1);
+            }
+            if (feedback1 == "Incorrect letter")
+            {
+                IncorrectLetters.Add(ChosenWord[0].ToString());
+            }
+            if (feedback2 == "Incorrect letter")
+            {
+
+            }
+            return null;
+        }
+
+        public bool IsGeneratedWordCorrect(string ChosenWord, string[] WordList, string feedback1)
+        {
+            bool b = IncorrectLetters.Any(ChosenWord.Contains);
+            if(b)
+            {
+                //Console.WriteLine("Letter is incorrect");
+                MessageBox.Show("Word is incorrect", "Wordle solver", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+    public void TestWords(string feedback1, string feedback2, string feedback3, string feedback4, string feedback5, string[] words)
+        {
+            string NewWord = GenerateRandom(words, feedback1);
+            if (feedback1 == "Incorrect letter")
+            {
+                LetterOneCorrect = false;
+            }
         }
 
     }

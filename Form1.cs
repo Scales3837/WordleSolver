@@ -14,7 +14,6 @@ namespace Wordle_Solver
 {
     public partial class WordleSolver : Form
     {
-
         string[] LettersEntered = new string[5];
         string[] words;
         string[] EnteredLetters = new string[0];
@@ -96,7 +95,7 @@ namespace Wordle_Solver
                 string f3 = comboBox3.SelectedItem.ToString();
                 string f4 = comboBox4.SelectedItem.ToString();
                 string f5 = comboBox5.SelectedItem.ToString();
-                tst.TestWords(f1, f2, f3, f4, f5, textBox1, textBox2, textBox3, textBox4, textBox5, words);
+                tst.TestWords(f1, f2, f3, f4, f5, words);
             }
             else
             {
@@ -106,18 +105,30 @@ namespace Wordle_Solver
                 string f4 = comboBox4.SelectedItem.ToString();
                 string f5 = comboBox5.SelectedItem.ToString();
                 tst.ShowWords(words, Words, PossibleWords, WordEntered, EnteredWord);
-                tst.TestWords(f1, f2, f3, f4, f5, textBox1, textBox2, textBox3, textBox4, textBox5, words);
+                tst.TestWords(f1, f2, f3, f4, f5, words);
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string f1 = comboBox1.SelectedItem.ToString();
-            string f2 = comboBox2.SelectedItem.ToString();
-            string f3 = comboBox3.SelectedItem.ToString();
-            string f4 = comboBox4.SelectedItem.ToString();
-            string f5 = comboBox5.SelectedItem.ToString();
-            tst.TestWords(f1, f2, f3, f4, f5, textBox1, textBox2, textBox3, textBox4, textBox5, words);
+            if (tst.OriginalWordTested)
+            {
+                string f1 = comboBox1.SelectedItem.ToString();
+                string f2 = comboBox2.SelectedItem.ToString();
+                string f3 = comboBox3.SelectedItem.ToString();
+                string f4 = comboBox4.SelectedItem.ToString();
+                string f5 = comboBox5.SelectedItem.ToString();
+                tst.TestWords(f1, f2, f3, f4, f5, words);
+            }
+            else
+            {
+                string f1 = comboBox1.SelectedItem.ToString();
+                string f2 = comboBox2.SelectedItem.ToString();
+                string f3 = comboBox3.SelectedItem.ToString();
+                string f4 = comboBox4.SelectedItem.ToString();
+                string f5 = comboBox5.SelectedItem.ToString();
+                tst.GenerateRandom(words, f1);
+            }
         }
     }
 }
