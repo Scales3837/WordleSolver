@@ -20,7 +20,9 @@ namespace Wordle_Solver
         string[] EnteredLetters = new string[0];
         Dictionary<int, String> WordEntered;
         Test tst = new Test();
+
         List<string> Words = new List<string>();
+
         List<string> feedback1 = new List<string>() { "Incorrect letter", "Correct letter, wrong place", "Correct letter, correct place" };
         List<string> feedback2 = new List<string>() { "Incorrect letter", "Correct letter, wrong place", "Correct letter, correct place" };
         List<string> feedback3 = new List<string>() { "Incorrect letter", "Correct letter, wrong place", "Correct letter, correct place" };
@@ -86,20 +88,36 @@ namespace Wordle_Solver
             WordEntered.Clear();
             Array.Clear(EnteredLetters, 0, EnteredLetters.Count());
             EnteredWord = textBox1.Text + textBox2.Text + textBox3.Text + textBox4.Text + textBox5.Text;
-            textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
-            textBox5.Text = "";
 
-            tst.ShowWords(words, Words, PossibleWords, WordEntered, EnteredWord);        }
+            if (tst.OriginalWordTested)
+            {
+                string f1 = comboBox1.SelectedItem.ToString();
+                string f2 = comboBox2.SelectedItem.ToString();
+                string f3 = comboBox3.SelectedItem.ToString();
+                string f4 = comboBox4.SelectedItem.ToString();
+                string f5 = comboBox5.SelectedItem.ToString();
+                tst.TestWords(f1, f2, f3, f4, f5, textBox1, textBox2, textBox3, textBox4, textBox5, words);
+            }
+            else
+            {
+                string f1 = comboBox1.SelectedItem.ToString();
+                string f2 = comboBox2.SelectedItem.ToString();
+                string f3 = comboBox3.SelectedItem.ToString();
+                string f4 = comboBox4.SelectedItem.ToString();
+                string f5 = comboBox5.SelectedItem.ToString();
+                tst.ShowWords(words, Words, PossibleWords, WordEntered, EnteredWord);
+                tst.TestWords(f1, f2, f3, f4, f5, textBox1, textBox2, textBox3, textBox4, textBox5, words);
+            }
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            PossibleWords.Items.Clear();
-            Random random = new Random();
-            int randomValue = random.Next(words.Count() - 1);
-            PossibleWords.Items.Add(words[randomValue]);
+            string f1 = comboBox1.SelectedItem.ToString();
+            string f2 = comboBox2.SelectedItem.ToString();
+            string f3 = comboBox3.SelectedItem.ToString();
+            string f4 = comboBox4.SelectedItem.ToString();
+            string f5 = comboBox5.SelectedItem.ToString();
+            tst.TestWords(f1, f2, f3, f4, f5, textBox1, textBox2, textBox3, textBox4, textBox5, words);
         }
     }
 }
