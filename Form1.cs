@@ -19,9 +19,13 @@ namespace Wordle_Solver
         string[] words;
         string[] EnteredLetters = new string[0];
         Dictionary<int, String> WordEntered;
-
+        Test tst = new Test();
         List<string> Words = new List<string>();
-
+        List<string> feedback1 = new List<string>() { "Incorrect letter", "Correct letter, wrong place", "Correct letter, correct place" };
+        List<string> feedback2 = new List<string>() { "Incorrect letter", "Correct letter, wrong place", "Correct letter, correct place" };
+        List<string> feedback3 = new List<string>() { "Incorrect letter", "Correct letter, wrong place", "Correct letter, correct place" };
+        List<string> feedback4 = new List<string>() { "Incorrect letter", "Correct letter, wrong place", "Correct letter, correct place"  };
+        List<string> feedback5 = new List<string>() { "Incorrect letter", "Correct letter, wrong place", "Correct letter, correct place" };
         public WordleSolver()
         {
             InitializeComponent();
@@ -33,6 +37,11 @@ namespace Wordle_Solver
             words = File.ReadAllLines(file);
             WordEntered = new Dictionary<int, string>();
             textBox1.Focus();
+            comboBox1.DataSource = feedback1;
+            comboBox2.DataSource = feedback2;
+            comboBox3.DataSource = feedback3;
+            comboBox4.DataSource = feedback4;
+            comboBox5.DataSource = feedback5;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -41,26 +50,10 @@ namespace Wordle_Solver
             textBox2.Focus();
         }
 
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(textBox1.Text))
-            {
-                textBox1.Text = "_";
-            }
-        } 
-
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             LettersEntered[1] = textBox2.Text;
             textBox3.Focus();
-        }
-
-        private void textBox2_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(textBox2.Text))
-            {
-                textBox2.Text = "_";
-            }
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -69,40 +62,16 @@ namespace Wordle_Solver
             textBox4.Focus();
         }
 
-        private void textBox3_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(textBox3.Text))
-            {
-                textBox3.Text = "_";
-            }
-        }
-
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
             LettersEntered[3] = textBox4.Text;
             textBox5.Focus();
         }
 
-        private void textBox4_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(textBox4.Text))
-            {
-                textBox4.Text = "_";
-            }
-        }
-
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
             LettersEntered[4] = textBox5.Text;
             button1.Focus();
-        }
-
-        private void textBox5_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(textBox5.Text))
-            {
-                textBox5.Text = "_";
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -113,48 +82,24 @@ namespace Wordle_Solver
             {
                 Words.Add(ValidWord);
             }
-            WordEntered.Clear();
             PossibleWords.Items.Clear();
-
+            WordEntered.Clear();
+            Array.Clear(EnteredLetters, 0, EnteredLetters.Count());
             EnteredWord = textBox1.Text + textBox2.Text + textBox3.Text + textBox4.Text + textBox5.Text;
-            if(LettersEntered.Contains("_"))
-            {
-                
-            }
-            foreach(string letter in LettersEntered)
-            {
-                if(letter != "_") {
-                    EnteredLetters.Append<string>(letter);
-                    EnteredWord = EnteredWord + letter;
-                }
-            }
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
 
-            for (int i = 0; i <= 4; i++)
-            {
-                WordEntered.Add(i, EnteredWord.Substring(i, 1));
-            }
-                
-                    foreach (KeyValuePair<int, string> word in WordEntered)
-                    {
-                Application.DoEvents();
-                foreach (string Word in words)
-                {
-                            if (Word.Substring(word.Key,1) == word.Value)
-                            {
-                                //PossibleWords.Items.Add(Word);
-                            }
-                            else if(word.Value == "_") { }
-                            else
-                            {
-                                Words.Remove(Word);
-                            }
-                            if (Words.Count == 1)
-                            {
-                                PossibleWords.Items.Add(Words[0]);
-                                break;
-                            }
-                        }
-                }
-            }
+            tst.ShowWords(words, Words, PossibleWords, WordEntered, EnteredWord);        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            PossibleWords.Items.Clear();
+            Random random = new Random();
+            int randomValue = random.Next(words.Count() - 1);
+            PossibleWords.Items.Add(words[randomValue]);
         }
     }
+}
