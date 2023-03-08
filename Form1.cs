@@ -17,6 +17,7 @@ namespace Wordle_Solver
 
         string[] LettersEntered = new string[5];
         string[] words;
+        string[] EnteredLetters = new string[0];
         Dictionary<int, String> WordEntered;
 
         List<string> Words = new List<string>();
@@ -31,6 +32,7 @@ namespace Wordle_Solver
             string file = @"C:\Users\FIE21502302\Documents\Visual Studio 2022\Code Snippets\Visual C#\My Code Snippets\Wordle Solver\valid-wordle-words.txt";
             words = File.ReadAllLines(file);
             WordEntered = new Dictionary<int, string>();
+            textBox1.Focus();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -115,8 +117,19 @@ namespace Wordle_Solver
             PossibleWords.Items.Clear();
 
             EnteredWord = textBox1.Text + textBox2.Text + textBox3.Text + textBox4.Text + textBox5.Text;
+            if(LettersEntered.Contains("_"))
+            {
+                
+            }
+            foreach(string letter in LettersEntered)
+            {
+                if(letter != "_") {
+                    EnteredLetters.Append<string>(letter);
+                    EnteredWord = EnteredWord + letter;
+                }
+            }
 
-            for (int i =0;i <=4; i++)
+            for (int i = 0; i <= 4; i++)
             {
                 WordEntered.Add(i, EnteredWord.Substring(i, 1));
             }
