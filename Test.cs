@@ -50,7 +50,7 @@ namespace Wordle_Solver
 
 
 
-        public string GenerateRandom(string[] WordList, string feedback1, string feedback2)
+        public string GenerateRandom(string[] WordList, string feedback1, string feedback2, string feedback3, string feedback4, string feedback5)
         {
             string[] Letters = new string[5];
             Random random = new Random();
@@ -74,7 +74,7 @@ namespace Wordle_Solver
             }
             else
             {
-                GenerateRandom(WordList, feedback1, feedback2);
+                GenerateRandom(WordList, feedback1, feedback2, feedback3, feedback4, feedback5);
             }
             if (feedback1 == "Incorrect letter")
             {
@@ -84,24 +84,41 @@ namespace Wordle_Solver
             {
                 IncorrectLetters.Add(ChosenWord[1].ToString());
             }
+            if (feedback3 == "Incorrect letter")
+            {
+                IncorrectLetters.Add(ChosenWord[2].ToString());
+            }
+            if (feedback4 == "Incorrect letter")
+            {
+                IncorrectLetters.Add(ChosenWord[3].ToString());
+            }
+            if (feedback5 == "Incorrect letter")
+            {
+                IncorrectLetters.Add(ChosenWord[4].ToString());
+            }
+
             return null;
         }
 
         public bool IsGeneratedWordCorrect(string ChosenWord)
         {
             bool b = IncorrectLetters.Any(ChosenWord.Contains);
-            if(b)
+            if (b)
             {
                 //Console.WriteLine("Letter is incorrect");
                 MessageBox.Show("Word is incorrect", "Wordle solver", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
+            }
+            else
+            {
+                return true;
             }
             return true;
         }
 
     public void TestWords(string feedback1, string feedback2, string feedback3, string feedback4, string feedback5, string[] words)
         {
-            string NewWord = GenerateRandom(words, feedback1, feedback2);
+            string NewWord = GenerateRandom(words, feedback1, feedback2, feedback3, feedback4, feedback5);
         }
 
     }
