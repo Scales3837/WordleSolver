@@ -127,7 +127,7 @@ namespace Wordle_Solver
                 string f3 = comboBox3.SelectedItem.ToString();
                 string f4 = comboBox4.SelectedItem.ToString();
                 string f5 = comboBox5.SelectedItem.ToString();
-                tst.GenerateRandom(words, f1);
+                tst.GenerateRandom(words, f1, f2);
             }
         }
     }
