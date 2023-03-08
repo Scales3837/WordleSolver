@@ -3,3 +3,6 @@ Input a word or get a word generated. Then use that word in wordle, provide feed
 
 # valid-wordle-words.txt or TrimedWordle.txt?
 TrimedWordle is a shortened version of valid-wordle-words meaning it will load quicker but there will only be 5 words available.
+
+# I have an issue, what should I do?
+You can view a FAQ in the wiki
